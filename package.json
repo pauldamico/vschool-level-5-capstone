@@ -1,0 +1,25 @@
+{
+  "name": "vschool-level5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pauldamico/vschool-level-5-capstone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pauldamico/vschool-level-5-capstone/issues"
+  },
+  "homepage": "https://github.com/pauldamico/vschool-level-5-capstone#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0"
+  }
+}
