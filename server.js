@@ -13,7 +13,8 @@ app.get('/', (req, res)=>{
 
 
 app.use('/recipes', require('./routes/recipeRouter.js'))
-app.use('/mealplans', require('./routes/mealPlanRouter.js'))
+app.use('/users', require('./routes/userRouter.js'))
+
 
 app.use((err, req, res, next)=>{
     return res.send({errMsg:err.message})

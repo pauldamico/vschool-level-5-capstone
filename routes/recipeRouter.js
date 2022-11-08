@@ -3,8 +3,7 @@ const recipeRouter = express.Router()
 const Recipe = require('../models/recipe.js')
 
 
-recipeRouter.route('/')
-.get((req, res, next)=>{
+recipeRouter.get('/', (req, res, next)=>{
 Recipe.find((err, allMeals)=>{
 if(err){
     res.status(500)
@@ -13,8 +12,9 @@ if(err){
 return res.send(allMeals)
 })
 })
-.post((req, res, next)=>{
+recipeRouter.post('/:userId', (req, res, next)=>{
     const postedRecipe = req.body
+    req.body.userId = req.params.userId
     const newRecipe = new Recipe(postedRecipe)
     newRecipe.save((err, addedRecipe)=>{
         if(err){
