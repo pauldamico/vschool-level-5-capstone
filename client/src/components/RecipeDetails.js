@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RecipeListContext } from "../recipeListContext";
 
 function RecipeDetails() {
-    const {oneRecipe} = useContext(RecipeListContext)
+    const { oneRecipe } = useContext(RecipeListContext)
     console.log(oneRecipe.extendedIngredients, "test list")
     const ingredients = oneRecipe?.extendedIngredients
     console.log(oneRecipe.sourceUrl)
@@ -21,7 +21,7 @@ function RecipeDetails() {
             <img src={oneRecipe.image} alt={oneRecipe.tile} />
             {ingredientList}
             <p>
-            Find instructions on <a href={oneRecipe.sourceUrl} target="_blank" rel="noopener noreferrer">{oneRecipe.sourceName}</a>
+                Find instructions on <a href={oneRecipe.sourceUrl} target="_blank" rel="noopener noreferrer">{oneRecipe.sourceName}</a>
             </p>
             <input />
             <button>Save to a list</button>
