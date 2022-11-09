@@ -17,6 +17,7 @@ function RecipeListContextProvider(props) {
         diet: "",
         intolerances: ""
     })
+    const [oneRecipe, setOneRecipe] = useState({})
 
     function handleChange(event) {
         const {name, value} = event.target
@@ -54,12 +55,20 @@ function RecipeListContextProvider(props) {
         // how to clear out the user-entered info after submit?
     }
 
+    function getRecipeDetails(id) {
+        axios.get(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${API_KEY}`)
+            .then(response => setOneRecipe(response.data))
+            .catch(error => console.log(error))
+    }
+
     return(
         <RecipeListContext.Provider value={{
             listData,
             formData,
             handleChange,
-            handleSubmit
+            handleSubmit,
+            oneRecipe,
+            getRecipeDetails
         }}>
             {props.children}
         </RecipeListContext.Provider>
