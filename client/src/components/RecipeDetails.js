@@ -9,9 +9,9 @@ function RecipeDetails() {
   console.log(oneRecipe.sourceUrl);
 console.log(users)
   const ingredientList = ingredients?.map(function (item) {
-    return <p>{item.original}</p>;
+    return <p key={item.id}>{item.original}</p>;
   });
-
+console.log(ingredientList)
 
   const selectChangeHandler = (event) => {   
     setSelectedUser(event.target.value);
