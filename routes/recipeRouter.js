@@ -12,6 +12,17 @@ if(err){
 return res.send(allMeals)
 })
 })
+
+recipeRouter.get('/:userId', (req, res, next)=>{
+    Recipe.find({userId:req.params.userId}, (err, allUsersRecipes)=>{
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.send(allUsersRecipes)
+})
+    })
+
 recipeRouter.post('/:userId', (req, res, next)=>{
     const postedRecipe = req.body
     req.body.userId = req.params.userId
@@ -24,6 +35,8 @@ recipeRouter.post('/:userId', (req, res, next)=>{
         res.send(addedRecipe)
 })
     })
+
+
 
 recipeRouter.put("/:recipeId", (req, res, next)=>{   
 
