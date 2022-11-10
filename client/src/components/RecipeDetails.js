@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import SaveToList from "./SaveToList";
-import { RecipeListContext } from "../recipeListContext";
+import { RecipeListContext} from "../recipeListContext";
 
 function RecipeDetails() {
-  const { oneRecipe, users, saveUserRecipe} = useContext(RecipeListContext);
-  const [selectedUser, setSelectedUser] = useState(users[0].name);
+  const { oneRecipe, users, saveUserRecipe, count} = useContext(RecipeListContext);
+  const [selectedUser, setSelectedUser] = useState(count.current >= 1 && users[0].name)
   const ingredients = oneRecipe?.extendedIngredients;
   console.log(oneRecipe.sourceUrl);
-
+console.log(users)
   const ingredientList = ingredients?.map(function (item) {
     return <p>{item.original}</p>;
   });
@@ -45,8 +45,8 @@ console.log(selectedUser)
       {/* <input /> */}
       <select
       
-        value="{selectedUser}"
-        name="{selectedUser}"
+        value={selectedUser}
+        name={selectedUser}
         onChange={selectChangeHandler}
       >
         {selectUser}

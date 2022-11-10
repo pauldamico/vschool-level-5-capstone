@@ -117,7 +117,8 @@ const postedRecipe = {recipeId:recId}
         handleSubmit,
         oneRecipe,
         getRecipeDetails,
-        saveUserRecipe
+        saveUserRecipe,
+        count
       }}
     >
       {props.children}
