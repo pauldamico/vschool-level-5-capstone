@@ -95,7 +95,7 @@ function RecipeListContextProvider(props) {
 const postedRecipe = {recipeId:recId}
     axios.post(`/recipes/${userId}`, postedRecipe)
     .then(res=>console.log(res.data))
-  
+    navigate('/')
   }
 
   function getRecipeDetails(id) {
@@ -117,7 +117,8 @@ const postedRecipe = {recipeId:recId}
         handleSubmit,
         oneRecipe,
         getRecipeDetails,
-        saveUserRecipe
+        saveUserRecipe,
+        count
       }}
     >
       {props.children}
