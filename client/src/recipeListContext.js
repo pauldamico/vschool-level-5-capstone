@@ -91,8 +91,8 @@ function RecipeListContextProvider(props) {
     // how to clear out the user-entered info after submit?
   }
 
-  function saveUserRecipe (userId,recId){
-const postedRecipe = {recipeId:recId}
+  function saveUserRecipe (userId,recId, img, title){
+const postedRecipe = {recipeId:recId, recipeImg:img, recipeTitle:title}
     axios.post(`/recipes/${userId}`, postedRecipe)
     .then(res=>console.log(res.data))
     navigate('/')

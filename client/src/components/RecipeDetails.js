@@ -21,9 +21,9 @@ console.log(ingredientList)
     const userId = !users.find(user=>selectedUser === user.name) ? userId = users[0]._id : users.find(user=>selectedUser === user.name)
   console.log(oneRecipe.extendedIngredients, "test list");
     
-    saveUserRecipe(userId._id, oneRecipe.id)
+    saveUserRecipe(userId._id, oneRecipe.id, oneRecipe.image, oneRecipe.title)
   }
-console.log(selectedUser)
+console.log(oneRecipe)
 
   const selectUser = users.map((user) => (
     <SaveToList key={user._id} {...user} name={user.name}></SaveToList>
