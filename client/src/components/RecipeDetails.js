@@ -6,12 +6,10 @@ function RecipeDetails() {
   const { oneRecipe, users, saveUserRecipe, count} = useContext(RecipeListContext);
   const [selectedUser, setSelectedUser] = useState(count.current >= 1 && users[0].name)
   const ingredients = oneRecipe?.extendedIngredients;
-  console.log(oneRecipe.sourceUrl);
-console.log(users)
+  
   const ingredientList = ingredients?.map(function (item) {
     return <p key={item.id}>{item.original}</p>;
   });
-console.log(ingredientList)
 
   const selectChangeHandler = (event) => {   
     setSelectedUser(event.target.value);
@@ -19,11 +17,9 @@ console.log(ingredientList)
 
   const saveToRecipeList = () =>{
     const userId = !users.find(user=>selectedUser === user.name) ? userId = users[0]._id : users.find(user=>selectedUser === user.name)
-  console.log(oneRecipe.extendedIngredients, "test list");
     
     saveUserRecipe(userId._id, oneRecipe.id, oneRecipe.image, oneRecipe.title)
   }
-console.log(oneRecipe)
 
   const selectUser = users.map((user) => (
     <SaveToList key={user._id} {...user} name={user.name}></SaveToList>
@@ -42,7 +38,6 @@ console.log(oneRecipe)
         </a>
       </p>
       <p>Select a user and save to list</p>
-      {/* <input /> */}
       <select
       
         value={selectedUser}

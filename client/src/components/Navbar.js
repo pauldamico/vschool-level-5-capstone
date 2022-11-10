@@ -5,6 +5,7 @@ function Navbar() {
         <nav>
             <Link to="/">Home</Link>
             <Link to="/returned-recipes">Search Results</Link>
+            <Link to="/saved-recipes">Saved Recipes</Link>
         </nav>
     )
 }
