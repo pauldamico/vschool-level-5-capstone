@@ -19,6 +19,7 @@ function RecipeListContextProvider(props) {
     intolerances: "",
   });
   const [oneRecipe, setOneRecipe] = useState({});
+  const [savedRecipesList, setSavedRecipesList] = useState([])
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -31,13 +32,13 @@ function RecipeListContextProvider(props) {
   }
 
 
-//               This allows the users to be created only on the second render and pulls the user data
+  //               This allows the users to be created only on the second render and pulls the user data
   useEffect(() => {
     axios.get("/users").then((res) => setUsers((prev) => res.data));
     count.current = count.current + 1;
   }, []);
 
-//               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
+  //               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
   if (
     count.current === 1 &&
     users.find((user) => "john" === user.name) === undefined &&
@@ -57,17 +58,6 @@ function RecipeListContextProvider(props) {
       .then((res) => setUsers((prev) => [...prev, res.data]));
   }
 
-
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&apiKey=${API_KEY}`
-      )
-      .then((response) => setListData(response.data.results))
-      .catch((error) => console.log(error));
-  }, []);
-
   function getSearchResults() {
     axios
       .get(
@@ -81,20 +71,13 @@ function RecipeListContextProvider(props) {
     event.preventDefault();
     getSearchResults();
     navigate("/returned-recipes");
-    // console.log(formData)
 
-    // setFormData({
-    //     search: "",
-    //     cuisine: "",
-    //     diet: ""
-    // })
-    // how to clear out the user-entered info after submit?
   }
 
-  function saveUserRecipe (userId,recId, img, title){
-const postedRecipe = {recipeId:recId, recipeImg:img, recipeTitle:title}
+  function saveUserRecipe(userId, recId, img, title) {
+    const postedRecipe = { recipeId: recId, recipeImg: img, recipeTitle: title }
     axios.post(`/recipes/${userId}`, postedRecipe)
-    .then(res=>console.log(res.data))
+      .then(res => console.log(res.data))
     navigate('/')
   }
 
@@ -118,7 +101,9 @@ const postedRecipe = {recipeId:recId, recipeImg:img, recipeTitle:title}
         oneRecipe,
         getRecipeDetails,
         saveUserRecipe,
-        count
+        count,
+        savedRecipesList,
+        setSavedRecipesList
       }}
     >
       {props.children}
