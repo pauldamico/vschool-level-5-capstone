@@ -1,15 +1,26 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RecipeListContext } from "../recipeListContext";
  
 function SavedRecipes() {
-    const {savedRecipesList, setSavedRecipesList} = useContext(RecipeListContext)
+    const {users, savedRecipesList, setSavedRecipesList} = useContext(RecipeListContext)
+    
+    // const [user, setUser] = useState("")
+    const [user, setUser] = useState(`${users[0].name}`)
 
-    useEffect((userId) => {
-        axios.get(`/recipes/636d4c92ed5a7c76e2ec86f7`)
+    const handleUserChange = (event) => {
+        setUser(event.target.value)
+        getRecipeList(user._id)
+    }
+    console.log(user._id)
+    const userId = user._id
+    // console.log(userId)
+
+    function getRecipeList(userId) {
+        axios.get(`/recipes/${userId}`)
             .then(res => setSavedRecipesList(res.data))
             .catch(err => console.log(err))
-    }, [])
+    }
 
     const displayRecipesList = savedRecipesList?.map(function (recipe) {
         return (
@@ -22,6 +33,11 @@ function SavedRecipes() {
  
     return (
         <div>
+            {user}
+            <select onChange={handleUserChange}>
+                <option value={user}> -- Select a user -- </option>
+                {users.map((user) => <option value={user.value}>{user.name}</option>)}
+            </select>
             {displayRecipesList}
         </div>
     )

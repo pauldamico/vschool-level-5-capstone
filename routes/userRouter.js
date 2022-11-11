@@ -50,6 +50,7 @@ userRouter.delete("/:userId", (req, res, next) => {
       }
       return res.send(
         `The recipe with the ID of ${deletedUser._id} has been deleted`
+        // change this to say "the user"?
       );
     }
   );
