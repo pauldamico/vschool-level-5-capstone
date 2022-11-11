@@ -19,7 +19,7 @@ function RecipeListContextProvider(props) {
     intolerances: "",
   });
   const [oneRecipe, setOneRecipe] = useState({});
-  const [savedRecipesList, setSavedRecipesList] = useState([])
+  const [savedRecipesList, setSavedRecipesList] = useState([]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -31,6 +31,10 @@ function RecipeListContextProvider(props) {
     });
   }
 
+  function selectMealPlanUser(id) {
+    console.log(id);
+    // setUsers(prev=>prev.map(user=>user._id === id ? {...prev, prev:{test:"test"}} : {...prev}))
+  }
 
   //               This allows the users to be created only on the second render and pulls the user data
   useEffect(() => {
@@ -48,13 +52,41 @@ function RecipeListContextProvider(props) {
     users.find((user) => "enzo" === user.name) === undefined
   ) {
     axios
-      .post("/users", { name: "john" })
+      .post("/users", {
+        name: "john",  
+         mealPlan: {
+          sunday: {
+            dinnerTitle: " john No Title",
+            dinnerImg: "john No Image",
+            dinnerRecipe: "john No Recipe",
+          },
+        },
+
+      })
       .then((res) => setUsers((prev) => [...prev, res.data]));
     axios
-      .post("/users", { name: "enzo" })
+      .post("/users", {
+        name: "enzo",
+        mealPlan: {
+          sunday: {
+            dinnerTitle: " Enzo No Title",
+            dinnerImg: "Enzo No Image",
+            dinnerRecipe: "Enzo No Recipe",
+          },
+        },
+      })
       .then((res) => setUsers((prev) => [...prev, res.data]));
     axios
-      .post("/users", { name: "sara" })
+      .post("/users", {
+        name: "sara",
+        mealPlan: {
+          sunday: {
+            dinnerTitle: " Sara No Title",
+            dinnerImg: " Sara No Image",
+            dinnerRecipe: " Sara No Recipe",
+          },
+        },
+      })
       .then((res) => setUsers((prev) => [...prev, res.data]));
   }
 
@@ -71,14 +103,18 @@ function RecipeListContextProvider(props) {
     event.preventDefault();
     getSearchResults();
     navigate("/returned-recipes");
-
   }
 
   function saveUserRecipe(userId, recId, img, title) {
-    const postedRecipe = { recipeId: recId, recipeImg: img, recipeTitle: title }
-    axios.post(`/recipes/${userId}`, postedRecipe)
-      .then(res => console.log(res.data))
-    navigate('/')
+    const postedRecipe = {
+      recipeId: recId,
+      recipeImg: img,
+      recipeTitle: title,
+    };
+    axios
+      .post(`/recipes/${userId}`, postedRecipe)
+      .then((res) => console.log(res.data));
+    navigate("/");
   }
 
   function getRecipeDetails(id) {
@@ -103,7 +139,8 @@ function RecipeListContextProvider(props) {
         saveUserRecipe,
         count,
         savedRecipesList,
-        setSavedRecipesList
+        setSavedRecipesList,
+        selectMealPlanUser,
       }}
     >
       {props.children}
