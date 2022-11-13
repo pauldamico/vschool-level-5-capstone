@@ -1,20 +1,29 @@
+import React,{useState} from "react"
 export default function MealPlanDay (props){
-console.log(props)
+console.log(props.onClick)
+    const [toggleEdit, setToggleEdit] = useState(false)
 
+    function updateOnClick (){
+        props.onClick(props.id)
+    }
     return(
         <div>
+            <button onClick={updateOnClick}>Edit</button>
             <div>
-            <h1>{props.breakfastTitle}</h1>
+                <h1>BreakFast</h1>       
+            <section>{props.breakfastTitle}</section>
             <h3>{props.breakfastRecipe}</h3>
             <p>{props.breakfastImg}</p>
             </div>
             <div>
-            <h1>{props.lunchTitle}</h1>
+            <h1>Lunch</h1>  
+            <section>{props.lunchTitle}</section>
             <h3>{props.lunchRecipe}</h3>
             <p>{props.lunchImg}</p>
             </div>
-            <div onClick={()=>{props.updateDinnerMeal("test")}}>
-            <h1 >{props.dinnerTitle}</h1>
+            <div >
+            <h1>Dinner</h1>  
+            <section >{props.dinnerTitle}</section>
             <h3 >{props.dinnerRecipe}</h3>
             <p >{props.dinnerImg}</p>
             </div>

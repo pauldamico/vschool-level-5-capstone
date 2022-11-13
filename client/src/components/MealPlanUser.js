@@ -6,12 +6,11 @@ export default function MealPlanUser(props) {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  function updateSelectUser() {
-   
-    selectMealPlanUser(props._id);
+  function updateSelectUser() { 
+    // selectMealPlanUser(props._id);
     props.updateDinnerMeal(
-      props.mealPlan
-
+      props.mealPlan,
+props._id
     );
     props.showUser();
   }
