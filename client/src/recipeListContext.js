@@ -31,9 +31,13 @@ function RecipeListContextProvider(props) {
     });
   }
 
-  function selectMealPlanUser(id) {
-    console.log(id);
-    // setUsers(prev=>prev.map(user=>user._id === id ? {...prev, prev:{test:"test"}} : {...prev}))
+  // function selectMealPlanUser(id) {
+  //   console.log(id);
+  //   // setUsers(prev=>prev.map(user=>user._id === id ? {...prev, prev:{test:"test"}} : {...prev}))
+  // }
+
+  function updateMealPlan (id){
+console.log(id)
   }
 
   //               This allows the users to be created only on the second render and pulls the user data
@@ -140,7 +144,7 @@ function RecipeListContextProvider(props) {
         count,
         savedRecipesList,
         setSavedRecipesList,
-        selectMealPlanUser,
+        updateMealPlan
       }}
     >
       {props.children}

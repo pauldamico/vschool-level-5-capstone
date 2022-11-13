@@ -21,12 +21,12 @@ export default function MealPlan() {
     setShowList(!showList);
   }
 
-  function updateDinnerMeal(userMealInfo) {
-    setCurrentUserInfo((prev) => ({...prev, ...userMealInfo }));
-    console.log(currentUserInfo);
+  function updateDinnerMeal(userMealInfo, id) {
+    setCurrentUserInfo((prev) => ({...prev, ...userMealInfo, id }));
+ 
   }
 
-  
+
 
   const chooseUser = users.map((user) => (
     <MealPlanUser
@@ -37,7 +37,27 @@ export default function MealPlan() {
       name={user.name}
     />
   ));
-
+  function sundayOnClick (id){
+    console.log("sunday", id)
+  }
+  function mondayOnClick (){
+    console.log("monday")
+  }
+  function tuesdayOnClick (){
+    console.log("tuesday")
+  }
+  function wednesdayOnClick (){
+    console.log("wednesday")
+  }
+  function thursdayOnClick (){
+    console.log("thursday")
+  }
+  function fridayOnClick (){
+    console.log("friday")
+  }
+  function saturdayOnClick (){
+    console.log("saturday")
+  }
   return (
     <div>
       {!showList && <div onClick={showUser}>Choose a user</div>}
@@ -51,15 +71,19 @@ export default function MealPlan() {
         <div>
           <h1>Sunday</h1>
           <MealPlanDay
+          onClick={sundayOnClick}
             dinnerTitle={currentUserInfo.sunday.dinnerTitle}
             dinnerRecipe={currentUserInfo.sunday.dinnerRecipe}
             dinnerImg={currentUserInfo.sunday.dinnerImg}
+            id={currentUserInfo.id}
             updateDinnerMeal={updateDinnerMeal}
           />
+         
         </div>
         <div>
           <h1>Monday</h1>
           <MealPlanDay
+           onClick={mondayOnClick}
             dinnerTitle={currentUserInfo.monday.dinnerTitle}
             dinnerRecipe={currentUserInfo.monday.dinnerRecipe}
             dinnerImg={currentUserInfo.monday.dinnerImg}
@@ -69,6 +93,7 @@ export default function MealPlan() {
         <div>
           <h1>Tuesday</h1>
           <MealPlanDay
+          onClick={tuesdayOnClick}
             dinnerTitle={currentUserInfo.tuesday.dinnerTitle}
             dinnerRecipe={currentUserInfo.tuesday.dinnerRecipe}
             dinnerImg={currentUserInfo.tuesday.dinnerImg}
@@ -78,6 +103,7 @@ export default function MealPlan() {
         <div>
           <h1>Wednesday</h1>
           <MealPlanDay
+          onClick={wednesdayOnClick}
             dinnerTitle={currentUserInfo.wednesday.dinnerTitle}
             dinnerRecipe={currentUserInfo.wednesday.dinnerRecipe}
             dinnerImg={currentUserInfo.wednesday.dinnerImg}
@@ -87,6 +113,7 @@ export default function MealPlan() {
         <div>
           <h1>Thursday</h1>
           <MealPlanDay
+          onClick={thursdayOnClick}
             dinnerTitle={currentUserInfo.thursday.dinnerTitle}
             dinnerRecipe={currentUserInfo.thursday.dinnerRecipe}
             dinnerImg={currentUserInfo.thursday.dinnerImg}
@@ -96,6 +123,7 @@ export default function MealPlan() {
         <div>
           <h1>Friday</h1>
           <MealPlanDay
+          onClick={fridayOnClick}
             dinnerTitle={currentUserInfo.friday.dinnerTitle}
             dinnerRecipe={currentUserInfo.friday.dinnerRecipe}
             dinnerImg={currentUserInfo.friday.dinnerImg}
@@ -105,6 +133,7 @@ export default function MealPlan() {
         <div>
           <h1>Saturday</h1>
           <MealPlanDay
+          onClick={saturdayOnClick}
             dinnerTitle={currentUserInfo.saturday.dinnerTitle}
             dinnerRecipe={currentUserInfo.saturday.dinnerRecipe}
             dinnerImg={currentUserInfo.saturday.dinnerImg}
