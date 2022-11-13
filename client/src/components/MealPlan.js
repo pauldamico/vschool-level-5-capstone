@@ -4,7 +4,7 @@ import { RecipeListContext } from "../recipeListContext";
 import MealPlanUser from "./MealPlanUser";
 
 export default function MealPlan() {
-  const { users } = useContext(RecipeListContext);
+  const { users, savedRecipes} = useContext(RecipeListContext);
 
   const [showList, setShowList] = useState(false);
   const [currentUserInfo, setCurrentUserInfo] = useState({
@@ -39,24 +39,31 @@ export default function MealPlan() {
   ));
   function sundayOnClick (id){
     console.log("sunday", id)
+console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function mondayOnClick (){
+  function mondayOnClick (id){
     console.log("monday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function tuesdayOnClick (){
+  function tuesdayOnClick (id){
     console.log("tuesday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function wednesdayOnClick (){
+  function wednesdayOnClick (id){
     console.log("wednesday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function thursdayOnClick (){
+  function thursdayOnClick (id){
     console.log("thursday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function fridayOnClick (){
+  function fridayOnClick (id){
     console.log("friday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
-  function saturdayOnClick (){
+  function saturdayOnClick (id){
     console.log("saturday")
+    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
   }
   return (
     <div>

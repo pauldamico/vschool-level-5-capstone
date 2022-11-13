@@ -20,6 +20,9 @@ function RecipeListContextProvider(props) {
   });
   const [oneRecipe, setOneRecipe] = useState({});
   const [savedRecipesList, setSavedRecipesList] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);
+
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -31,18 +34,15 @@ function RecipeListContextProvider(props) {
     });
   }
 
-  // function selectMealPlanUser(id) {
-  //   console.log(id);
-  //   // setUsers(prev=>prev.map(user=>user._id === id ? {...prev, prev:{test:"test"}} : {...prev}))
-  // }
 
-  function updateMealPlan (id){
-console.log(id)
+  function updateMealPlan(id) {
+    console.log(id);
   }
 
   //               This allows the users to be created only on the second render and pulls the user data
   useEffect(() => {
     axios.get("/users").then((res) => setUsers((prev) => res.data));
+    axios.get("/recipes").then((res) => setSavedRecipes(res.data));
     count.current = count.current + 1;
   }, []);
 
@@ -57,15 +57,14 @@ console.log(id)
   ) {
     axios
       .post("/users", {
-        name: "john",  
-         mealPlan: {
+        name: "john",
+        mealPlan: {
           sunday: {
             dinnerTitle: " john No Title",
             dinnerImg: "john No Image",
             dinnerRecipe: "john No Recipe",
           },
         },
-
       })
       .then((res) => setUsers((prev) => [...prev, res.data]));
     axios
@@ -130,6 +129,7 @@ console.log(id)
       .catch((error) => console.log(error));
   }
 
+  function filterRecipeByUserId() {}
   return (
     <RecipeListContext.Provider
       value={{
@@ -144,7 +144,8 @@ console.log(id)
         count,
         savedRecipesList,
         setSavedRecipesList,
-        updateMealPlan
+        updateMealPlan,
+        savedRecipes
       }}
     >
       {props.children}

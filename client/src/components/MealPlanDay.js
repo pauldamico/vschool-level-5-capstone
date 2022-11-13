@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 export default function MealPlanDay (props){
-console.log(props.onClick)
+
     const [toggleEdit, setToggleEdit] = useState(false)
 
     function updateOnClick (){
