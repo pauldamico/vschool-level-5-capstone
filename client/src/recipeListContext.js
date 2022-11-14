@@ -20,7 +20,7 @@ function RecipeListContextProvider(props) {
   });
   const [oneRecipe, setOneRecipe] = useState({});
   const [savedRecipesList, setSavedRecipesList] = useState([]);
-  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);    // this has all of the recipes for all users.  Use this to filter recipes by userId
 
 
 
@@ -39,59 +39,57 @@ function RecipeListContextProvider(props) {
     console.log(id);
   }
 
-  //               This allows the users to be created only on the second render and pulls the user data
+  //               This allows the users to be created only on the second render and pulls the user data  
+  //               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
   useEffect(() => {
     axios.get("/users").then((res) => setUsers((prev) => res.data));
     axios.get("/recipes").then((res) => setSavedRecipes(res.data));
     count.current = count.current + 1;
-  }, []);
+    if (    
+      users.find((user) => "john" === user.name) === undefined &&
+      users.find((user) => "sara" === user.name) === undefined &&     
+      users.find((user) => "enzo" === user.name) === undefined
+    ) {
+      axios
+        .post("/users", {
+          name: "john",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " john No Title",
+              dinnerImg: "john No Image",
+              dinnerRecipe: "john No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "enzo",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Enzo No Title",
+              dinnerImg: "Enzo No Image",
+              dinnerRecipe: "Enzo No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "sara",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Sara No Title",
+              dinnerImg: " Sara No Image",
+              dinnerRecipe: " Sara No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+    }
 
-  //               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
-  if (
-    count.current === 1 &&
-    users.find((user) => "john" === user.name) === undefined &&
-    count.current === 1 &&
-    users.find((user) => "sara" === user.name) === undefined &&
-    count.current === 1 &&
-    users.find((user) => "enzo" === user.name) === undefined
-  ) {
-    axios
-      .post("/users", {
-        name: "john",
-        mealPlan: {
-          sunday: {
-            dinnerTitle: " john No Title",
-            dinnerImg: "john No Image",
-            dinnerRecipe: "john No Recipe",
-          },
-        },
-      })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-    axios
-      .post("/users", {
-        name: "enzo",
-        mealPlan: {
-          sunday: {
-            dinnerTitle: " Enzo No Title",
-            dinnerImg: "Enzo No Image",
-            dinnerRecipe: "Enzo No Recipe",
-          },
-        },
-      })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-    axios
-      .post("/users", {
-        name: "sara",
-        mealPlan: {
-          sunday: {
-            dinnerTitle: " Sara No Title",
-            dinnerImg: " Sara No Image",
-            dinnerRecipe: " Sara No Recipe",
-          },
-        },
-      })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-  }
+  }, []);
+  
 
   function getSearchResults() {
     axios

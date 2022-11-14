@@ -2,11 +2,14 @@ import React, { useState, useContext } from "react";
 import MealPlanDay from "./MealPlanDay";
 import { RecipeListContext } from "../recipeListContext";
 import MealPlanUser from "./MealPlanUser";
+import axios from "axios";
+
 
 export default function MealPlan() {
   const { users, savedRecipes} = useContext(RecipeListContext);
 
   const [showList, setShowList] = useState(false);
+  const [currentUserRecipes, setCurrentUserRecipes] = useState([])
   const [currentUserInfo, setCurrentUserInfo] = useState({
     sunday: {},
     monday: {},
@@ -21,11 +24,14 @@ export default function MealPlan() {
     setShowList(!showList);
   }
 
-  function updateDinnerMeal(userMealInfo, id) {
-    setCurrentUserInfo((prev) => ({...prev, ...userMealInfo, id }));
- 
-  }
 
+  function updateDinnerMeal(userMealInfo, id, currentUserRecipe) {
+    setCurrentUserInfo((prev) => ({...prev, ...userMealInfo, id }));
+    axios.get(`/recipes/${id}`)
+    .then(res=>setCurrentUserRecipes(prev=>res.data))
+    .catch(err=>console.log(err))
+    
+  }
 
 
   const chooseUser = users.map((user) => (
@@ -37,9 +43,13 @@ export default function MealPlan() {
       name={user.name}
     />
   ));
-  function sundayOnClick (id){
-    console.log("sunday", id)
-console.log(savedRecipes.filter(recipe=>recipe.userId === id))
+  function sundayOnClick (userId){
+
+    // axios.get(`/recipes/${userId}`)
+    // .then(res=>console.log(res.data))
+    // .catch(err=>console.log(err))
+ 
+
   }
   function mondayOnClick (id){
     console.log("monday")
@@ -84,6 +94,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerImg={currentUserInfo.sunday.dinnerImg}
             id={currentUserInfo.id}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
          
         </div>
@@ -95,6 +106,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.monday.dinnerRecipe}
             dinnerImg={currentUserInfo.monday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
         <div>
@@ -105,6 +117,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.tuesday.dinnerRecipe}
             dinnerImg={currentUserInfo.tuesday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
         <div>
@@ -115,6 +128,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.wednesday.dinnerRecipe}
             dinnerImg={currentUserInfo.wednesday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
         <div>
@@ -125,6 +139,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.thursday.dinnerRecipe}
             dinnerImg={currentUserInfo.thursday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
         <div>
@@ -135,6 +150,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.friday.dinnerRecipe}
             dinnerImg={currentUserInfo.friday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
         <div>
@@ -145,6 +161,7 @@ console.log(savedRecipes.filter(recipe=>recipe.userId === id))
             dinnerRecipe={currentUserInfo.saturday.dinnerRecipe}
             dinnerImg={currentUserInfo.saturday.dinnerImg}
             updateDinnerMeal={updateDinnerMeal}
+            currentUserRecipes={currentUserRecipes}
           />
         </div>
       </div>
