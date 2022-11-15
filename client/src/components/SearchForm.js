@@ -22,8 +22,11 @@ function SearchForm() {
             >
                 <option value=""> - </option>
                 <option value="american">American</option>
-                <option value="indian">Indian</option>
+                <option value="cajun">Cajun</option>
                 <option value="french">French</option>
+                <option value="indian">Indian</option>
+                <option value="mediterranean">Mediterranean</option>
+                <option value="mexican">Mexican</option>
             </select>
             <br />
             <label htmlFor="diet">Diet</label>
@@ -36,7 +39,7 @@ function SearchForm() {
                 <option value=""> - </option>
                 <option value="gluten-free">Gluten Free</option>
                 <option value="vegetarian">Vegetarian</option>
-                <option value="paleo">Paleo</option>
+                <option value="vegan">Vegan</option>
             </select>
             <br />
             <label htmlFor="intolerances">Intolerances</label>
@@ -48,8 +51,11 @@ function SearchForm() {
             >
                 <option value=""> - </option>
                 <option value="dairy">Dairy</option>
+                <option value="egg">Egg</option>
                 <option value="peanut">Peanut</option>
+                <option value="shellfish">Shellfish</option>
                 <option value="soy">Soy</option>
+                <option value="tree-nut">Tree Nut</option>
             </select>
             <br />
             <br />
