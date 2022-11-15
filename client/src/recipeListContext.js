@@ -4,14 +4,19 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeListContext = React.createContext();
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = "2e641a3043994a5d8aabfbf2e8dd7470"
+
 
 function RecipeListContextProvider(props) {
   const navigate = useNavigate();
   const count = useRef(0);
   const [users, setUsers] = useState([]);
   const [listData, setListData] = useState([]);
-  // console.log(listData)
+  const [offset, setOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  
   const [formData, setFormData] = useState({
     search: "",
     cuisine: "",
@@ -33,6 +38,12 @@ function RecipeListContextProvider(props) {
       };
     });
   }
+
+  function handlePageClick(data) {
+    setOffset(data.selected * recipesPerPage)
+}
+
+
 
 
   function updateMealPlan(id) {
@@ -88,8 +99,34 @@ function RecipeListContextProvider(props) {
         .then((res) => setUsers((prev) => [...prev, res.data]));
     }
 
-  }, []);
+
+  //NUMBER OF RESULTS WANTED PER PAGE
+  const recipesPerPage = 9;
+
+  //MAKES PAGE NUMBER NOT BECOME THE ORIGINAL STATE OF 0 WHEN A USER LOADS OR REFRESHES THE PAGE
+  window.onload = getNumberOfPages()
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&number=${recipesPerPage}&offset=${offset}&apiKey=${API_KEY}`
+      )
+      .then((response) => setListData(response.data.results))
+      .catch((error) => console.log(error));
+  }, [offset]);
+
+  // FOR SETTING THE CORRECT AMOUNT OF PAGES DISPLAYED FOR THE USER
+  function getNumberOfPages () {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&number=999&apiKey=${API_KEY}`
+      )
+      .then((response) => setPageCount(response.data.totalResults))
+      .catch((error) => console.log(error));
+  };
+
   
+
 
   function getSearchResults() {
     axios
@@ -140,10 +177,14 @@ function RecipeListContextProvider(props) {
         getRecipeDetails,
         saveUserRecipe,
         count,
+        handlePageClick,
+        pageCount,
+        recipesPerPage,
         savedRecipesList,
         setSavedRecipesList,
         updateMealPlan,
         savedRecipes
+
       }}
     >
       {props.children}

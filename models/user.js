@@ -92,3 +92,4 @@ userSchema.index({
   unique: true,})
 
 module.exports = mongoose.model("User", userSchema);
+
