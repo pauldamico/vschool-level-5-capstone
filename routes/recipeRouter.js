@@ -3,44 +3,57 @@ const recipeRouter = express.Router()
 const Recipe = require('../models/recipe.js')
 
 
-recipeRouter.get('/', (req, res, next)=>{
-Recipe.find((err, allMeals)=>{
-if(err){
-    res.status(500)
-    return next(err)
-}
-return res.send(allMeals)
+recipeRouter.get('/', (req, res, next) => {
+    Recipe.find((err, allMeals) => {
+        if (err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.send(allMeals)
+    })
 })
+
+recipeRouter.get('/:userId', (req, res, next) => {
+    Recipe.find({ userId: req.params.userId }, (err, allUsersRecipes) => {
+        if (err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.send(allUsersRecipes)
+    })
 })
-recipeRouter.post('/:userId', (req, res, next)=>{
+
+recipeRouter.post('/:userId', (req, res, next) => {
     const postedRecipe = req.body
     req.body.userId = req.params.userId
     const newRecipe = new Recipe(postedRecipe)
-    newRecipe.save((err, addedRecipe)=>{
-        if(err){
+    newRecipe.save((err, addedRecipe) => {
+        if (err) {
             res.status(500)
             return next(err)
         }
         res.send(addedRecipe)
-})
     })
-
-recipeRouter.put("/:recipeId", (req, res, next)=>{   
-
-    Recipe.findOneAndUpdate({_id:req.params.recipeId}, req.body, {new:true}, (err, updatedInfo)=>{
-if(err){
-    res.status(500)
-    return next(err)
-}
-return res.send(updatedInfo)
-    })
-
 })
 
-recipeRouter.delete("/:recipeId", (req, res, next)=>{
 
-    Recipe.findOneAndDelete({_id:req.params.recipeId}, (err, deletedRecipe)=>{
-        if(err){
+
+recipeRouter.put("/:recipeId", (req, res, next) => {
+
+    Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, { new: true }, (err, updatedInfo) => {
+        if (err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.send(updatedInfo)
+    })
+
+})
+
+recipeRouter.delete("/:recipeId", (req, res, next) => {
+
+    Recipe.findOneAndDelete({ _id: req.params.recipeId }, (err, deletedRecipe) => {
+        if (err) {
             res.status(500)
             return next(err)
         }
