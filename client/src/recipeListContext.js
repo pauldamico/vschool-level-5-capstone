@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const RecipeListContext = React.createContext();
 
 // const API_KEY = process.env.REACT_APP_API_KEY;
-const API_KEY = "2e641a3043994a5d8aabfbf2e8dd7470"
+const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
 
 
 function RecipeListContextProvider(props) {
@@ -41,7 +41,7 @@ function RecipeListContextProvider(props) {
 
   function handlePageClick(data) {
     setOffset(data.selected * recipesPerPage)
-}
+  }
 
 
 
@@ -96,12 +96,14 @@ function RecipeListContextProvider(props) {
             },
           },
         })
-        .then((res) => setUsers((prev) => [...prev, res.data]));
-    }
+        .then((res) => setUsers((prev) => [...prev, res.data]))
+
+      }}, [])
+
 
 
   //NUMBER OF RESULTS WANTED PER PAGE
-  const recipesPerPage = 9;
+  const recipesPerPage = 12;
 
   //MAKES PAGE NUMBER NOT BECOME THE ORIGINAL STATE OF 0 WHEN A USER LOADS OR REFRESHES THE PAGE
   window.onload = getNumberOfPages()
@@ -109,7 +111,7 @@ function RecipeListContextProvider(props) {
   useEffect(() => {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&number=${recipesPerPage}&offset=${offset}&apiKey=${API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&number=${recipesPerPage}&offset=${offset}&apiKey=${API_KEY}`
       )
       .then((response) => setListData(response.data.results))
       .catch((error) => console.log(error));
@@ -119,7 +121,7 @@ function RecipeListContextProvider(props) {
   function getNumberOfPages () {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&number=999&apiKey=${API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&apiKey=${API_KEY}`
       )
       .then((response) => setPageCount(response.data.totalResults))
       .catch((error) => console.log(error));
@@ -131,7 +133,7 @@ function RecipeListContextProvider(props) {
   function getSearchResults() {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&apiKey=${API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&number=${recipesPerPage}&apiKey=${API_KEY}`
       )
       .then((response) => setListData(response.data.results))
       .catch((error) => console.log(error));
@@ -165,6 +167,7 @@ function RecipeListContextProvider(props) {
   }
 
   function filterRecipeByUserId() {}
+
   return (
     <RecipeListContext.Provider
       value={{

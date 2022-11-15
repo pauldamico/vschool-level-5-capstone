@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/pauldamico/vschool-level-5-capstone#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
