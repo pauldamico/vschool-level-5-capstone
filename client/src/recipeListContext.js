@@ -26,6 +26,10 @@ function RecipeListContextProvider(props) {
     intolerances: "",
   });
   const [oneRecipe, setOneRecipe] = useState({});
+  const [savedRecipesList, setSavedRecipesList] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);    // this has all of the recipes for all users.  Use this to filter recipes by userId
+
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -44,31 +48,58 @@ function RecipeListContextProvider(props) {
 
 
 
-//               This allows the users to be created only on the second render and pulls the user data
+  function updateMealPlan(id) {
+    console.log(id);
+  }
+
+  //               This allows the users to be created only on the second render and pulls the user data  
+  //               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
   useEffect(() => {
     axios.get("/users").then((res) => setUsers((prev) => res.data));
+    axios.get("/recipes").then((res) => setSavedRecipes(res.data));
     count.current = count.current + 1;
-  }, []);
-
-//               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
-  if (
-    count.current === 1 &&
-    users.find((user) => "john" === user.name) === undefined &&
-    count.current === 1 &&
-    users.find((user) => "sara" === user.name) === undefined &&
-    count.current === 1 &&
-    users.find((user) => "enzo" === user.name) === undefined
-  ) {
-    axios
-      .post("/users", { name: "john" })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-    axios
-      .post("/users", { name: "enzo" })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-    axios
-      .post("/users", { name: "sara" })
-      .then((res) => setUsers((prev) => [...prev, res.data]));
-  }
+    if (    
+      users.find((user) => "john" === user.name) === undefined &&
+      users.find((user) => "sara" === user.name) === undefined &&     
+      users.find((user) => "enzo" === user.name) === undefined
+    ) {
+      axios
+        .post("/users", {
+          name: "john",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " john No Title",
+              dinnerImg: "john No Image",
+              dinnerRecipe: "john No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "enzo",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Enzo No Title",
+              dinnerImg: "Enzo No Image",
+              dinnerRecipe: "Enzo No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "sara",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Sara No Title",
+              dinnerImg: " Sara No Image",
+              dinnerRecipe: " Sara No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+    }
 
 
   //NUMBER OF RESULTS WANTED PER PAGE
@@ -96,6 +127,9 @@ function RecipeListContextProvider(props) {
       .catch((error) => console.log(error));
   };
 
+  
+
+
   function getSearchResults() {
     axios
       .get(
@@ -109,21 +143,18 @@ function RecipeListContextProvider(props) {
     event.preventDefault();
     getSearchResults();
     navigate("/returned-recipes");
-    // console.log(formData)
-
-    // setFormData({
-    //     search: "",
-    //     cuisine: "",
-    //     diet: ""
-    // })
-    // how to clear out the user-entered info after submit?
   }
 
-  function saveUserRecipe (userId,recId){
-const postedRecipe = {recipeId:recId}
-    axios.post(`/recipes/${userId}`, postedRecipe)
-    .then(res=>console.log(res.data))
-    navigate('/')
+  function saveUserRecipe(userId, recId, img, title) {
+    const postedRecipe = {
+      recipeId: recId,
+      recipeImg: img,
+      recipeTitle: title,
+    };
+    axios
+      .post(`/recipes/${userId}`, postedRecipe)
+      .then((res) => console.log(res.data));
+    navigate("/");
   }
 
   function getRecipeDetails(id) {
@@ -135,6 +166,7 @@ const postedRecipe = {recipeId:recId}
       .catch((error) => console.log(error));
   }
 
+  function filterRecipeByUserId() {}
   return (
     <RecipeListContext.Provider
       value={{
@@ -149,7 +181,12 @@ const postedRecipe = {recipeId:recId}
         count,
         handlePageClick,
         pageCount,
-        recipesPerPage
+        recipesPerPage,
+        savedRecipesList,
+        setSavedRecipesList,
+        updateMealPlan,
+        savedRecipes
+
       }}
     >
       {props.children}
