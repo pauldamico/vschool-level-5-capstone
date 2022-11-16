@@ -104,6 +104,7 @@ function RecipeListContextProvider(props) {
     event.preventDefault();
     getSearchResults();
     navigate("/returned-recipes");
+    // need to add in here a way to clear the search form back to blank
   }
 
   function saveUserRecipe(userId, recId, img, title) {
