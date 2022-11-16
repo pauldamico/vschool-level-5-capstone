@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeListContext = React.createContext();
 
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 // const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
+
+
 
 
 function RecipeListContextProvider(props) {
@@ -41,15 +44,20 @@ function RecipeListContextProvider(props) {
 
   function handlePageClick(data) {
     setOffset(data.selected * recipesPerPage)
+
   }
+
+
+
 
   //THIS GETS THE USER/RECIPEINFO WHEN STARTING
   useEffect(() => {                                                          
     axios.get("/users").then((res) => setUsers((prev) => res.data));
     axios.get("/recipes").then((res) => setSavedRecipes(res.data));
-    count.current = count.current + 1;
- 
+    count.current = count.current + 1; 
     }, [])
+
+
 
 
 
@@ -122,7 +130,9 @@ function RecipeListContextProvider(props) {
       .catch((error) => console.log(error));
   }
 
+
  
+
 
   return (
     <RecipeListContext.Provider
