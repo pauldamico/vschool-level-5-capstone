@@ -27,8 +27,9 @@ export default function MealPlanWeek(props) {
     props.currentUserInfo;
 
   return (
-    <div className="main-mealplan-div">
-      <div>
+    <div  className="container-fluid" >
+      <div className="row">
+      <div className="col">
         <MealPlanSunday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -40,7 +41,7 @@ export default function MealPlanWeek(props) {
         
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanMonday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -51,7 +52,7 @@ export default function MealPlanWeek(props) {
           mondayDinner={mondayDinner}
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanTuesday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -62,7 +63,7 @@ export default function MealPlanWeek(props) {
           tuesdayDinner={tuesdayDinner}
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanWednesday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -73,7 +74,7 @@ export default function MealPlanWeek(props) {
           wednesdayDinner={wednesdayDinner}
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanThursday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -84,7 +85,7 @@ export default function MealPlanWeek(props) {
           thursdayDinner={thursdayDinner}
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanFriday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -95,7 +96,7 @@ export default function MealPlanWeek(props) {
           fridayDinner={fridayDinner}
         />
       </div>
-      <div>
+      <div className="col">
         <MealPlanSaturday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -105,6 +106,7 @@ export default function MealPlanWeek(props) {
           saturdayLunch={saturdayLunch}
           saturdayDinner={saturdayDinner}
         />
+      </div>
       </div>
     </div>
   );

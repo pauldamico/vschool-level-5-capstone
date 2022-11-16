@@ -68,7 +68,7 @@ const userSchema = new Schema({
     img: { type: String },
     recipe: { type: String },
   },
-  thursdayDinner: {
+  thursdayLunch: {
     title: { type: String },
     img: { type: String },
     recipe: { type: String },

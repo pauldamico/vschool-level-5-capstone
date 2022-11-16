@@ -32,14 +32,18 @@ function toggler (){
   return (
   <div>
       <div >
-        <button onClick={getUserRecipes} >Select Meal</button>
-    { toggle &&<div onClick={toggler}>       
+     
+    { toggle &&<div className="mealplan-list-div" onClick={toggler}>       
       {listOfRecipes}
       </div>}
       {props.children}
-      <h3>{props.title}</h3>
-      <img src={props.img} />
+      <div style={{height:"15vh", backgroundImage:`url(${props.img})`, borderRadius:"10px"}}>
+      <button onClick={getUserRecipes} >Select Meal</button>
+      <h3 style={{fontSize:"15px"}}>{props.title}</h3>
+
+      {/* <img style={{width:"21vh"}} src={props.img} /> */}
       <p>{props.recipe}</p>
+      </div>
     </div>
     </div>
   );
