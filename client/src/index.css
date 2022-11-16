@@ -1,3 +1,7 @@
+/* img {
+    height: 100px;
+} */
+
 .meal-plan-div{
     display: flex;
     justify-content: space-around;
@@ -13,6 +17,50 @@
     right:0;
 }
 
+.background-main {
+    background-color: #43bc42;
+}
+
+.background-main-image {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://source.unsplash.com/EWDvHNNfUmQ");
+}
+
+.img-responsive {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.saved-recipe {
+    width: 270px;
+}
+
+.card-image {
+    object-fit: contain;
+}
+
+@media (min-width: 576px) {
+/* put the image behind the search? */
+}
+
+@media screen and (min-width: 768px) {
+    .main-img {
+        height: 570px;
+    }
+}
+
+@media (min-width: 992px) {
+    .main-img {
+        height: 579px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-img {
+        height: 586px;
+    }
+}
 
 .main-mealplan-div{
     display: flex;

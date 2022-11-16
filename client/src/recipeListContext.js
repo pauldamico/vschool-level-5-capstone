@@ -105,6 +105,7 @@ function RecipeListContextProvider(props) {
     getSearchResults();
     getNumberOfPages();
     navigate("/returned-recipes");
+    // need to add in here a way to clear the search form back to blank
   }
 
 
