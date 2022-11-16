@@ -2,89 +2,114 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: { type: String, required: true },
-  mealPlan: {
-    sunday: {
-      dinnerTitle: { type: String },
-      dinnerImg: { type: String },
-      dinnerRecipe: { type: String },
-      lunchTitle: { type: String },
-      lunchImg: { type: String },
-      lunchRecipe: { type: String },
-      breakfastTitle: { type: String },
-      breakfastImg: { type: String },
-      breakfastRecipe: { type: String }
-    },
-    monday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      },
-      tuesday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      },
-      wednesday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      },
-      thursday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      },
-      friday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      },
-      saturday: {
-        dinnerTitle: { type: String },
-        dinnerImg: { type: String },
-        dinnerRecipe: { type: String },
-        lunchTitle: { type: String },
-        lunchImg: { type: String },
-        lunchRecipe: { type: String },
-        breakfastTitle: { type: String },
-        breakfastImg: { type: String },
-        breakfastRecipe: { type: String }
-      }          
-  }
 
-
-  
+  sundayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  sundayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  sundayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  mondayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  mondayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  mondayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  tuesdayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  tuesdayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  tuesdayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  wednesdayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  wednesdayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  wednesdayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  thursdayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  thursdayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  thursdayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  fridayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  fridayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  fridayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  saturdayBreakfast: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  saturdayLunch: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  },
+  saturdayDinner: {
+    title: { type: String },
+    img: { type: String },
+    recipe: { type: String },
+  }  
 });
+
 
 userSchema.index({
   name: 1,
@@ -92,4 +117,5 @@ userSchema.index({
   unique: true,})
 
 module.exports = mongoose.model("User", userSchema);
+
 
