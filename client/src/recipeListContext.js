@@ -103,10 +103,12 @@ function RecipeListContextProvider(props) {
 
 
   //NUMBER OF RESULTS WANTED PER PAGE
-  const recipesPerPage = 12;
+  const recipesPerPage = 9;
 
   //MAKES PAGE NUMBER NOT BECOME THE ORIGINAL STATE OF 0 WHEN A USER LOADS OR REFRESHES THE PAGE
-  window.onload = getNumberOfPages()
+  useEffect(() => {
+    getNumberOfPages()
+  }, [offset])
 
   useEffect(() => {
     axios
@@ -142,6 +144,7 @@ function RecipeListContextProvider(props) {
   function handleSubmit(event) {
     event.preventDefault();
     getSearchResults();
+    getNumberOfPages();
     navigate("/returned-recipes");
   }
 
