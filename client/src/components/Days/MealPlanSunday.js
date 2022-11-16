@@ -39,9 +39,9 @@ export default function MealPlanSunday(props) {
           updateMealPlan={props.updateMealPlan}
          toggleUpdatePlan={ props.toggleUpdateMealPlan}
             id={props.id}
-            title={props.sunday.sundayBreakfastTitle}
-            img={props.sunday.sundayBreakfastImg}
-            recipe={props.sunday.sundayBreakfastRecipe}
+            title={props.sundayBreakfast.title}
+            img={props.sundayBreakfast.img}
+            recipe={props.sundayBreakfast.recipe}
             onClick={updateSundayBreakfast}
           ></MealPlanList>
         </div>
@@ -53,9 +53,9 @@ export default function MealPlanSunday(props) {
          updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.sunday.sundayLunchTitle}
-          img={props.sunday.sundayLunchImg}
-          recipe={props.sunday.sundayLunchRecipe}
+          title={props.sundayLunch.title}
+          img={props.sundayLunch.img}
+          recipe={props.sundayLunch.recipe}
           onClick={updateSundayLunch}
         ></MealPlanList>
       </div>
@@ -65,9 +65,9 @@ export default function MealPlanSunday(props) {
           updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.sunday.sundayDinnerTitle}
-          img={props.sunday.sundayDinnerImg}
-          recipe={props.sunday.sundayDinnerRecipe}
+          title={props.sundayDinner.title}
+          img={props.sundayDinner.img}
+          recipe={props.sundayDinner.recipe}
           onClick={updateSundayDinner}
         ></MealPlanList>
       </div>

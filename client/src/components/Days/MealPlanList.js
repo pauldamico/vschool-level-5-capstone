@@ -21,9 +21,11 @@ function toggler (){
   ));
 
   function getUserRecipes() {
+    
     axios
       .get(`/recipes/${props.id}`)
-      .then((res) => setCurrentRecipes((prev) => res.data));
+      .then((res) => setCurrentRecipes(res.data));
+      console.log(currentRecipes)
       toggler()
   }
 

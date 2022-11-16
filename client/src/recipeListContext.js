@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeListContext = React.createContext();
 
-// const API_KEY = process.env.REACT_APP_API_KEY;
-const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
+const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
 
 
 function RecipeListContextProvider(props) {

@@ -11,6 +11,7 @@ export default function MealPlanSaturday(props) {
 
   function updateSaturdayDinner(id, dinnerTitle, dinnerImg, dinnerRecipe) {
     props.updateToDatabase(id, dinnerTitle, dinnerImg,dinnerRecipe, day, dinner );
+  
   }
 
   function updateSaturdayLunch(id, lunchTitle, lunchImg, lunchRecipe) {
@@ -26,7 +27,7 @@ export default function MealPlanSaturday(props) {
     props.updateToDatabase(id, breakfastTitle, breakfastImg,breakfastRecipe, day, breakfast);
     
   }
-
+ 
   return (
     <div>
       <h1>Saturday</h1>
@@ -38,9 +39,9 @@ export default function MealPlanSaturday(props) {
           updateMealPlan={props.updateMealPlan}
          toggleUpdatePlan={ props.toggleUpdateMealPlan}
             id={props.id}
-            title={props.saturday.saturdayBreakfastTitle}
-            img={props.saturday.saturdayBreakfastImg}
-            recipe={props.saturday.saturdayBreakfastRecipe}
+            title={props.saturdayBreakfast.title}
+            img={props.saturdayBreakfast.img}
+            recipe={props.saturdayBreakfast.recipe}
             onClick={updateSaturdayBreakfast}
           ></MealPlanList>
         </div>
@@ -52,9 +53,9 @@ export default function MealPlanSaturday(props) {
          updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.saturday.saturdayLunchTitle}
-          img={props.saturday.saturdayLunchImg}
-          recipe={props.saturday.saturdayLunchRecipe}
+          title={props.saturdayLunch.title}
+          img={props.saturdayLunch.img}
+          recipe={props.saturdayLunch.recipe}
           onClick={updateSaturdayLunch}
         ></MealPlanList>
       </div>
@@ -64,9 +65,9 @@ export default function MealPlanSaturday(props) {
           updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.saturday.saturdayDinnerTitle}
-          img={props.saturday.saturdayDinnerImg}
-          recipe={props.saturday.saturdayDinnerRecipe}
+          title={props.saturdayDinner.title}
+          img={props.saturdayDinner.img}
+          recipe={props.saturdayDinner.recipe}
           onClick={updateSaturdayDinner}
         ></MealPlanList>
       </div>

@@ -11,6 +11,7 @@ export default function MealPlanMonday(props) {
 
   function updateMondayDinner(id, dinnerTitle, dinnerImg, dinnerRecipe) {
     props.updateToDatabase(id, dinnerTitle, dinnerImg,dinnerRecipe, day, dinner );
+  
   }
 
   function updateMondayLunch(id, lunchTitle, lunchImg, lunchRecipe) {
@@ -38,9 +39,9 @@ export default function MealPlanMonday(props) {
           updateMealPlan={props.updateMealPlan}
          toggleUpdatePlan={ props.toggleUpdateMealPlan}
             id={props.id}
-            title={props.monday.mondayBreakfastTitle}
-            img={props.monday.mondayBreakfastImg}
-            recipe={props.monday.mondayBreakfastRecipe}
+            title={props.mondayBreakfast.title}
+            img={props.mondayBreakfast.img}
+            recipe={props.mondayBreakfast.recipe}
             onClick={updateMondayBreakfast}
           ></MealPlanList>
         </div>
@@ -52,9 +53,9 @@ export default function MealPlanMonday(props) {
          updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.monday.mondayLunchTitle}
-          img={props.monday.mondayLunchImg}
-          recipe={props.monday.mondayLunchRecipe}
+          title={props.mondayLunch.title}
+          img={props.mondayLunch.img}
+          recipe={props.mondayLunch.recipe}
           onClick={updateMondayLunch}
         ></MealPlanList>
       </div>
@@ -64,9 +65,9 @@ export default function MealPlanMonday(props) {
           updateMealPlan={props.updateMealPlan}
           toggleUpdatePlan={ props.toggleUpdateMealPlan}
           id={props.id}
-          title={props.monday.mondayDinnerTitle}
-          img={props.monday.mondayDinnerImg}
-          recipe={props.monday.mondayDinnerRecipe}
+          title={props.mondayDinner.title}
+          img={props.mondayDinner.img}
+          recipe={props.mondayDinner.recipe}
           onClick={updateMondayDinner}
         ></MealPlanList>
       </div>
