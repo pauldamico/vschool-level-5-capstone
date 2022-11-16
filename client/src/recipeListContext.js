@@ -4,14 +4,19 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeListContext = React.createContext();
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
+
 
 function RecipeListContextProvider(props) {
   const navigate = useNavigate();
   const count = useRef(0);
   const [users, setUsers] = useState([]);
   const [listData, setListData] = useState([]);
-  // console.log(listData)
+  const [offset, setOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+
+  
   const [formData, setFormData] = useState({
     search: "",
     cuisine: "",
@@ -33,6 +38,12 @@ function RecipeListContextProvider(props) {
       };
     });
   }
+
+  function handlePageClick(data) {
+    setOffset(data.selected * recipesPerPage)
+  }
+
+
 
 
 
@@ -86,14 +97,86 @@ function RecipeListContextProvider(props) {
     //     })
     //     .then((res) => setUsers((prev) => [...prev, res.data]));
     // }
+    if (    
+      users.find((user) => "john" === user.name) === undefined &&
+      users.find((user) => "sara" === user.name) === undefined &&     
+      users.find((user) => "enzo" === user.name) === undefined
+    ) {
+      axios
+        .post("/users", {
+          name: "john",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " john No Title",
+              dinnerImg: "john No Image",
+              dinnerRecipe: "john No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "enzo",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Enzo No Title",
+              dinnerImg: "Enzo No Image",
+              dinnerRecipe: "Enzo No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]));
+      axios
+        .post("/users", {
+          name: "sara",
+          mealPlan: {
+            sunday: {
+              dinnerTitle: " Sara No Title",
+              dinnerImg: " Sara No Image",
+              dinnerRecipe: " Sara No Recipe",
+            },
+          },
+        })
+        .then((res) => setUsers((prev) => [...prev, res.data]))
 
-  }, []);
+      }}, [])
+
+
+
+  //NUMBER OF RESULTS WANTED PER PAGE
+  const recipesPerPage = 9;
+
+  //MAKES PAGE NUMBER NOT BECOME THE ORIGINAL STATE OF 0 WHEN A USER LOADS OR REFRESHES THE PAGE
+  useEffect(() => {
+    getNumberOfPages()
+  }, [offset])
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&number=${recipesPerPage}&offset=${offset}&apiKey=${API_KEY}`
+      )
+      .then((response) => setListData(response.data.results))
+      .catch((error) => console.log(error));
+  }, [offset]);
+
+  // FOR SETTING THE CORRECT AMOUNT OF PAGES DISPLAYED FOR THE USER
+  function getNumberOfPages () {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&apiKey=${API_KEY}`
+      )
+      .then((response) => setPageCount(response.data.totalResults))
+      .catch((error) => console.log(error));
+  };
+
   
+
 
   function getSearchResults() {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&apiKey=${API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${formData.search}&cuisine=${formData.cuisine}&diet=${formData.diet}&intolerances=${formData.intolerances}&number=${recipesPerPage}&apiKey=${API_KEY}`
       )
       .then((response) => setListData(response.data.results))
       .catch((error) => console.log(error));
@@ -102,6 +185,7 @@ function RecipeListContextProvider(props) {
   function handleSubmit(event) {
     event.preventDefault();
     getSearchResults();
+    getNumberOfPages();
     navigate("/returned-recipes");
   }
 
@@ -128,6 +212,7 @@ function RecipeListContextProvider(props) {
       .catch((error) => console.log(error));
   }
 
+  function filterRecipeByUserId() {}
 
   return (
     <RecipeListContext.Provider
@@ -141,9 +226,13 @@ function RecipeListContextProvider(props) {
         getRecipeDetails,
         saveUserRecipe,
         count,
+        handlePageClick,
+        pageCount,
+        recipesPerPage,
         savedRecipesList,
         setSavedRecipesList,       
         savedRecipes
+
       }}
     >
       {props.children}
