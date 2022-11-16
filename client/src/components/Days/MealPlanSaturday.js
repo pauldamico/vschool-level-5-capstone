@@ -26,7 +26,7 @@ export default function MealPlanSaturday(props) {
     props.updateToDatabase(id, breakfastTitle, breakfastImg,breakfastRecipe, day, breakfast);
     
   }
-  console.log(props.saturday.saturdayBreakfastTitle)
+
   return (
     <div>
       <h1>Saturday</h1>

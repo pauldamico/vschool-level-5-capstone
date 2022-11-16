@@ -43,103 +43,13 @@ function RecipeListContextProvider(props) {
     setOffset(data.selected * recipesPerPage)
   }
 
-
-
-
-
-
-                // This allows the users to be created only on the second render and pulls the user data  
-                // Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
-  useEffect(() => {
+  //THIS GETS THE USER/RECIPEINFO WHEN STARTING
+  useEffect(() => {                                                          
     axios.get("/users").then((res) => setUsers((prev) => res.data));
     axios.get("/recipes").then((res) => setSavedRecipes(res.data));
     count.current = count.current + 1;
-    console.log(users)
-    // if (    
-    //   users.find((user) => "john" === user.name) === undefined &&
-    //   users.find((user) => "sara" === user.name) === undefined &&     
-    //   users.find((user) => "enzo" === user.name) === undefined
-    // ) {
-    //   axios
-    //     .post("/users", {
-    //       name: "john",
-    //       mealPlan: {
-    //         sunday: {
-    //           dinnerTitle: " john No Title",
-    //           dinnerImg: "john No Image",
-    //           dinnerRecipe: "john No Recipe",
-    //         },
-    //       },
-    //     })
-    //     .then((res) => setUsers((prev) => [...prev, res.data]));
-    //   axios
-    //     .post("/users", {
-    //       name: "enzo",
-    //       mealPlan: {
-    //         sunday: {
-    //           dinnerTitle: " Enzo No Title",
-    //           dinnerImg: "Enzo No Image",
-    //           dinnerRecipe: "Enzo No Recipe",
-    //         },
-    //       },
-    //     })
-    //     .then((res) => setUsers((prev) => [...prev, res.data]));
-    //   axios
-    //     .post("/users", {
-    //       name: "sara",
-    //       mealPlan: {
-    //         sunday: {
-    //           dinnerTitle: " Sara No Title",
-    //           dinnerImg: " Sara No Image",
-    //           dinnerRecipe: " Sara No Recipe",
-    //         },
-    //       },
-    //     })
-    //     .then((res) => setUsers((prev) => [...prev, res.data]));
-    // }
-    if (    
-      users.find((user) => "john" === user.name) === undefined &&
-      users.find((user) => "sara" === user.name) === undefined &&     
-      users.find((user) => "enzo" === user.name) === undefined
-    ) {
-      axios
-        .post("/users", {
-          name: "john",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " john No Title",
-              dinnerImg: "john No Image",
-              dinnerRecipe: "john No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]));
-      axios
-        .post("/users", {
-          name: "enzo",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " Enzo No Title",
-              dinnerImg: "Enzo No Image",
-              dinnerRecipe: "Enzo No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]));
-      axios
-        .post("/users", {
-          name: "sara",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " Sara No Title",
-              dinnerImg: " Sara No Image",
-              dinnerRecipe: " Sara No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]))
-
-      }}, [])
+ 
+    }, [])
 
 
 
@@ -212,7 +122,7 @@ function RecipeListContextProvider(props) {
       .catch((error) => console.log(error));
   }
 
-  function filterRecipeByUserId() {}
+ 
 
   return (
     <RecipeListContext.Provider

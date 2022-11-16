@@ -11,6 +11,7 @@ export default function MealPlanSunday(props) {
 
   function updateSundayDinner(id, dinnerTitle, dinnerImg, dinnerRecipe) {
     props.updateToDatabase(id, dinnerTitle, dinnerImg,dinnerRecipe, day, dinner );
+  
   }
 
   function updateSundayLunch(id, lunchTitle, lunchImg, lunchRecipe) {
@@ -26,7 +27,7 @@ export default function MealPlanSunday(props) {
     props.updateToDatabase(id, breakfastTitle, breakfastImg,breakfastRecipe, day, breakfast);
     
   }
-  console.log(props.sunday.sundayBreakfastTitle)
+ 
   return (
     <div>
       <h1>Sunday</h1>
