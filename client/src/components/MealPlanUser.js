@@ -1,20 +1,21 @@
-import React, { useState, useContext } from "react";
-import { RecipeListContext } from "../recipeListContext";
-
-
 export default function MealPlanUser(props) {
-  const { selectMealPlanUser } = useContext(RecipeListContext);
-
-  const [currentUser, setCurrentUser] = useState({});
-
   function updateSelectUser() {
-    props.updateDinnerMeal(props.mealPlan, props._id);
+    props.updateUserInfo(props.user._id, 
+      props.user.sunday,
+      props.user.monday,
+      props.user.tuesday,
+      props.user.wednesday,
+      props.user.thursday,
+      props.user.friday,
+      props.user.saturday,           
+      );
     props.showUser();
   }
 
+
   return (
     <div>
-      <li onClick={updateSelectUser}>{props.name}</li>
+      <li onClick={updateSelectUser}>{props.user.name}</li>
     </div>
   );
 }

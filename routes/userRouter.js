@@ -13,6 +13,8 @@ userRouter.get("/", (req, res, next) => {
     return res.send(allUsers);
   });
 });
+
+
 userRouter.post("/", (req, res, next) => {
   const createdUser = req.body;
   const newUser = new User(createdUser);
@@ -35,6 +37,7 @@ userRouter.put("/:userId", (req, res, next) => {
         res.status(500);
         return next(err);
       }
+      console.log(req.body)
       return res.send(updatedUserInfo);
     }
   );
