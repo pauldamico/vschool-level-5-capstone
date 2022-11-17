@@ -71,6 +71,10 @@ border-radius: 10px;
     display: flex;
     flex-direction:column;
     align-items: center;
+    background-color: white;
+    height:100vh;
+    z-index: 100;
+  
 }
 .meal-plan-recipe-summary{
     margin-top: 5%;
