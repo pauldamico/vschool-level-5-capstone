@@ -40,7 +40,7 @@ axios.get(`https://api.spoonacular.com/recipes/${props.recipe}/information?inclu
 .then(res=> setCurrentRecipe((res.data.analyzedInstructions[0].steps)))
 .catch(err=>console.log(err))
 showRecipeToggler()
-
+console.log(API_KEY)
 }
   return (
   <div>
