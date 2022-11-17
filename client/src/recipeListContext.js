@@ -152,7 +152,8 @@ function RecipeListContextProvider(props) {
         recipesPerPage,
         savedRecipesList,
         setSavedRecipesList,       
-        savedRecipes
+        savedRecipes,
+        API_KEY
 
       }}
     >
