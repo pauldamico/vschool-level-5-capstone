@@ -8,11 +8,13 @@ function Recipe(props) {
 
     return (
         <div className = "col-sm-6 col-md-4 v my-2">
-            <div className = "card shadow-sm w-100" style = {{ minHeight: 225 }}>
+            <div className = "card shadow-sm w-100" style = {{ minHeight: 350 }}>
                 <div className = "card-body">
-                    <Link to={`/returned-recipes/${props.recipe.id}`} onClick={() => getRecipeDetails(props.recipe.id)}>Title: {props.recipe.title}</Link>
+                    <Link to={`/returned-recipes/${props.recipe.id}`} onClick={() => getRecipeDetails(props.recipe.id)}>
+                        <h1 className = "recipe-title">{props.recipe.title}</h1>
                     <br />
-                    <img src={props.recipe.image} alt={props.recipe.tile} />
+                    <img src={props.recipe.image} alt={props.recipe.tile} className = "results-img"/>
+                    </Link>
                 </div>
             </div>
         </div>

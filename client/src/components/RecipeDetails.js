@@ -26,29 +26,33 @@ function RecipeDetails() {
   ));
 
   return (
-    <div>
-      <h4>{oneRecipe.title}</h4>
-      <p>Servings: {oneRecipe.servings}</p>
-      <img src={oneRecipe.image} alt={oneRecipe.tile} />
-      {ingredientList}
-      <p>
-        Find instructions on{" "}
-        <a href={oneRecipe.sourceUrl} target="_blank" rel="noopener noreferrer">
-          {oneRecipe.sourceName}
-        </a>
-      </p>
-      <p>Select a user and save to list</p>
-      <select
-      
-        value={selectedUser}
-        name={selectedUser}
-        onChange={selectChangeHandler}
-      >
-        {selectUser}
-      </select>
-
-   
-      <button onClick ={saveToRecipeList}>Save to a list</button>
+    <div className = "individual-recipe-div">
+      <div className = "individual-recipe-div2">
+        <h4 className = "individual-recipe-title">{oneRecipe.title}</h4>
+        <p>Servings: {oneRecipe.servings}</p>
+        <img className = "individual-recipe-img" src={oneRecipe.image} alt={oneRecipe.tile} />
+        {ingredientList}
+        <p>
+          Find instructions on{" "}
+          <a href={oneRecipe.sourceUrl} target="_blank" rel="noopener noreferrer">
+            {oneRecipe.sourceName}
+          </a>
+        </p>
+        <p className = "individual-recipe-save">Select a user and save to list</p>
+        
+        <div className = "individual-recipe-userDiv">
+          <select
+            className = "individual-recipe-nameSelect"
+            value={selectedUser}
+            name={selectedUser}
+            onChange={selectChangeHandler}
+          > 
+            {selectUser}
+          </select>
+          <br />
+          <button className = "individual-recipe-button" onClick ={saveToRecipeList}>Save to a list</button>
+        </div>
+      </div>
     </div>
   );
 }

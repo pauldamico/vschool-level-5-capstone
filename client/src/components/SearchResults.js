@@ -25,27 +25,28 @@ function SearchResults() {
         <div className="container">
             <div className = "row m-2">
                 {displayList}
-
-                <ReactPaginate
-                    previousLabel = {"Previous"}
-                    nextLabel = {"Next"}
-                    breakLabel = {"..."}
-                    pageCount = {finalPageCount}
-                    marginPagesDisplayed = {3}
-                    // pageRangeDisplsyed = {3}
-                    onPageChange = {handlePageClick}
-                    containerClassName = {"pagination justify-content-center"}
-                    pageClassName = {"page-item"}
-                    pageLinkClassName = {"page-link"}
-                    previousClassName = {"page-item"}
-                    previousLinkClassName = {"page-link"}
-                    nextClassName = {"page-item"}
-                    nextLinkClassName = {"page-link"}
-                    breakClassName = {"page-item"}
-                    breakLinkClassName = {"page-link"}
-                    //HIGHLIGHT THE CURRENT PAGE NUMBER
-                    activeClassName = {"active"}
-                />
+                <div className = "pagination">
+                    <ReactPaginate
+                        previousLabel = {"Previous"}
+                        nextLabel = {"Next"}
+                        breakLabel = {"..."}
+                        pageCount = {finalPageCount}
+                        marginPagesDisplayed = {3}
+                        // pageRangeDisplsyed = {3}
+                        onPageChange = {handlePageClick}
+                        containerClassName = {"pagination justify-content-center"}
+                        pageClassName = {"page-item"}
+                        pageLinkClassName = {"page-link"}
+                        previousClassName = {"page-item"}
+                        previousLinkClassName = {"page-link"}
+                        nextClassName = {"page-item"}
+                        nextLinkClassName = {"page-link"}
+                        breakClassName = {"page-item"}
+                        breakLinkClassName = {"page-link"}
+                        //HIGHLIGHT THE CURRENT PAGE NUMBER
+                        activeClassName = {"active"}
+                    />
+                </div>
             </div>
         </div>
     )
