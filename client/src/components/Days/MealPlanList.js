@@ -6,7 +6,7 @@ import axios from "axios";
 export default function MealPlanList(props) {
   const {API_KEY} = useContext(RecipeListContext)
   const [currentRecipes, setCurrentRecipes] = useState([]);
-  const [currentRecipe, setCurrentRecipe] = useState({id:"", summary:"", title:""});
+  const [currentRecipe, setCurrentRecipe] = useState([]);
 const [toggle, setToggle] = useState(false)
 const [recipeToggle, setRecipeToggle] = useState(false)
 function toggler (){
@@ -32,21 +32,16 @@ setRecipeToggle(!recipeToggle)
   function getUserRecipes() {    
     axios
       .get(`/recipes/${props.id}`)
-      .then((res) => setCurrentRecipes(res.data));
-      console.log(currentRecipes)
+      .then((res) => setCurrentRecipes(res.data));    
       toggler()
   }
-
 function showRecipe(){
-axios.get(`https://api.spoonacular.com/recipes/${props.recipe}/summary?apiKey=${API_KEY}`)
-.then(res=> setCurrentRecipe(prev=>({...prev, summary:res.data.summary})))
+axios.get(`https://api.spoonacular.com/recipes/${props.recipe}/information?includeNutrition=false&apiKey=${API_KEY}`)
+.then(res=> setCurrentRecipe((res.data.analyzedInstructions[0].steps)))
 .catch(err=>console.log(err))
-console.log(currentRecipe)
 showRecipeToggler()
+
 }
-
-
-
   return (
   <div>
       <div >
@@ -71,7 +66,7 @@ showRecipeToggler()
       <button onClick={getUserRecipes} >Select Meal</button>
       {!recipeToggle &&<button onClick={showRecipe} >ShowRecipe</button>}</div>
       {recipeToggle &&
-      <MealPlanGetRecipe recipeToggle={recipeToggle} showRecipeToggler ={showRecipeToggler} recipeSummary={currentRecipe.summary}/>
+      <MealPlanGetRecipe recipeToggle={recipeToggle} title={props.title} showRecipeToggler ={showRecipeToggler} currentRecipe ={currentRecipe} />
       }
     
       </div>

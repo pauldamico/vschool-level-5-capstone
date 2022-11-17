@@ -1,17 +1,17 @@
 import axios from "axios"
 export default function MealPlanGetRecipe (props) {
-    console.log(props)
-
-    console.log(props.recipeSummary)
-
+ 
+const listSteps = props.currentRecipe.map(item=><div><h3>{item.number}</h3><p>{item.step}</p></div>)
     return (
         <div>
      
        
-       <div className="mealplan-list-div">
+       <div className="mealplan-recipe-div">
        <button onClick={props.showRecipeToggler}>Go Back</button>
-       <h1>{props.recipeSummary}</h1>
-          
+       <div className= "mealplan-recipe-div-center">
+        <h1>{props.title}</h1>
+       <div className="meal-plan-recipe-summary">{listSteps}</div>
+       </div>
         </div>
         </div>
     )

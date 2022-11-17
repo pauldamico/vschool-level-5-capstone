@@ -51,7 +51,32 @@
     left:0;
     right:0;
 }
-
+.mealplan-recipe-div{
+    display: flex;
+    flex-direction:column;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    top:0;
+    left:0;
+    right:0;
+}
+.mealplan-recipe-div>button{
+    margin: 10px;
+width: 100px;
+border-radius: 10px;
+}
+.mealplan-recipe-div-center{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+.meal-plan-recipe-summary{
+    margin-top: 5%;
+    width: 40%;
+    font-size: 20px;
+}
 
 .recipe-title {
     font-family: 'Josefin Sans', sans-serif;
