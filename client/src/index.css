@@ -1,6 +1,7 @@
-/* img {
-    height: 100px;
-} */
+
+/* GOOGLE FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&family=Josefin+Sans:ital,wght@1,700&display=swap');
+
 
 .meal-plan-div{
     display: flex;
@@ -50,6 +51,95 @@
     left:0;
     right:0;
 }
+
+
+.recipe-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 17px;
+    margin-bottom: -10px;
+    text-align: center;
+    color: gray;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: gray;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.pagination {
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.results-img {
+    border-radius: 15px;
+}
+
+.individual-recipe-title {
+    font-size: 35px;
+    color: rgb(66, 170, 170);
+}
+
+.individual-recipe-div {
+    display: flex;
+    font-family: 'Josefin Sans', sans-serif;
+    justify-content: center;
+    margin-top: 35px;
+    /* background: linear-gradient(180deg, #9f9d9d , #2eb29c); */
+    background-image: url("https://img.freepik.com/free-vector/brush-strokes-background_53876-90918.jpg?w=2000");
+}
+
+.individual-recipe-div2 {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 50%;
+    text-align: center;
+    border-radius: 35px;
+    padding: 20px 20px;
+}
+
+.individual-recipe-save {
+    margin-top: 40px;
+    font-size: 25px;
+    font-family: 'DM Serif Display', serif;
+    color: rgb(66, 170, 170);
+}
+
+.individual-recipe-button {
+    color:rgb(66, 170, 170);
+    border-color:rgb(66, 170, 170);
+    padding: 2px 6px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.7s;
+}
+
+.individual-recipe-button:hover {
+    color: #fff;
+    background-color: rgb(66, 170, 170);
+}
+
+.individual-recipe-nameSelect {
+    /* color: rgb(66, 170, 170); */
+    border-radius: 5px;
+    /* border: 2px solid rgb(66, 170, 170);
+    border-color: rgb(66, 170, 170); */
+    width: 20%;
+    margin-bottom: 15px;
+    transition: 0.6s;
+    text-align: center;
+}
+
+.individual-recipe-userDiv {
+    display: block;
+}
+
+.individual-recipe-img {
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
 .select-meal-grid{
     display: grid;
     grid-template-columns: repeat(4, 20%);
@@ -172,5 +262,6 @@ border-radius: 20px;
     justify-content: space-evenly;
 
 }
+
 
 
