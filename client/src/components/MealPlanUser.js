@@ -28,8 +28,7 @@ export default function MealPlanUser(props) {
 console.log(props)
 
   return (
-    <div>
-      <li onClick={updateSelectUser}>{props.user.name}</li>
-    </div>
-  );
+      <option  onClick={updateSelectUser}>{props.user.name}</option>
+     
+    );
 }

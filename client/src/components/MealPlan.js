@@ -86,9 +86,19 @@ export default function MealPlan() {
 
   return (
     <div>
-      <section onClick={showUser}>Select User</section>
-
-      {showList && <div>{chooseUser}</div>}
+      <div className="container p-4 my-4 bg-white rounded-3">
+      <div className="row d-flex justify-content-center">
+      <div className="col-auto">
+        <div>
+      <div className= "meal-plan-select-user-div" onClick={showUser}>-- Select a User --
+      
+      {showList && <div >     
+        {chooseUser}</div>}
+        </div>
+        </div>
+      </div>
+      </div>
+      </div>
       <div>
         <MealPlanWeek
           updateToDatabase={updateToDatabase}

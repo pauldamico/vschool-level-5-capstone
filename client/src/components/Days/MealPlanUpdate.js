@@ -9,10 +9,10 @@ console.log( props.recipeTitle,props.recipeImg, props.recipeId)
 }
   return (
   
-    <div  onClick={updateDay}>
-      <h3>{props.recipeTitle}</h3>      
-      <img src={props.recipeImg} />
-      <section>Recipe Id: {props.recipeId}</section>
+    <div style={{backgroundImage:`url(${props.recipeImg})`, backgroundSize:"cover"}} className="meal-plan-list-meals" onClick={updateDay}>
+      <h3 className="select-meal-title">{props.recipeTitle}</h3>      
+      
+      <section className="select-meal-recipe">Recipe Id: {props.recipeId}</section>
     
     </div>
   );
