@@ -29,7 +29,7 @@ export default function MealPlanWeek(props) {
   return (
     <div  className="container-fluid" >
       <div className="row">
-      <div className="col">
+      <div className="col meal-column" >
         <MealPlanSunday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -41,7 +41,7 @@ export default function MealPlanWeek(props) {
         
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanMonday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -52,7 +52,7 @@ export default function MealPlanWeek(props) {
           mondayDinner={mondayDinner}
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanTuesday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -63,7 +63,7 @@ export default function MealPlanWeek(props) {
           tuesdayDinner={tuesdayDinner}
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanWednesday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -74,7 +74,7 @@ export default function MealPlanWeek(props) {
           wednesdayDinner={wednesdayDinner}
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanThursday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -85,7 +85,7 @@ export default function MealPlanWeek(props) {
           thursdayDinner={thursdayDinner}
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanFriday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
@@ -96,7 +96,7 @@ export default function MealPlanWeek(props) {
           fridayDinner={fridayDinner}
         />
       </div>
-      <div className="col">
+      <div className="col meal-column">
         <MealPlanSaturday
           updateToDatabase={props.updateToDatabase}
           updateMealPlan={updateMealPlan}
