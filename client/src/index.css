@@ -100,6 +100,8 @@ border-radius: 10px;
 
 .results-img {
     border-radius: 15px;
+    width: 80%;
+    height: 50%;
 }
 
 .individual-recipe-title {
@@ -111,9 +113,10 @@ border-radius: 10px;
     display: flex;
     font-family: 'Josefin Sans', sans-serif;
     justify-content: center;
-   
     /* background: linear-gradient(180deg, #9f9d9d , #2eb29c); */
     background-image: url("https://img.freepik.com/free-vector/brush-strokes-background_53876-90918.jpg?w=2000");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .individual-recipe-div2 {
@@ -163,6 +166,7 @@ border-radius: 10px;
 .individual-recipe-img {
     border-radius: 20px;
     margin-bottom: 25px;
+    width: 70%;
 }
 
 .select-meal-grid{
@@ -285,7 +289,6 @@ border-radius: 20px;
     width: 100%;
     margin: 0;
     justify-content: space-evenly;
-
 }
 
 
