@@ -86,7 +86,7 @@
     display: flex;
     font-family: 'Josefin Sans', sans-serif;
     justify-content: center;
-    margin-top: 35px;
+   
     /* background: linear-gradient(180deg, #9f9d9d , #2eb29c); */
     background-image: url("https://img.freepik.com/free-vector/brush-strokes-background_53876-90918.jpg?w=2000");
 }
