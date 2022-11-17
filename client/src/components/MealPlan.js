@@ -1,169 +1,110 @@
-import React, { useState, useContext } from "react";
-import MealPlanDay from "./MealPlanDay";
-import { RecipeListContext } from "../recipeListContext";
+import React, { useState, useContext, useEffect } from "react";
 import MealPlanUser from "./MealPlanUser";
+import { RecipeListContext } from "../recipeListContext";
+import MealPlanWeek from "./MealPlanWeek";
 import axios from "axios";
 
-
 export default function MealPlan() {
-  const { users, savedRecipes} = useContext(RecipeListContext);
-
+  const { users, savedRecipes } = useContext(RecipeListContext);
   const [showList, setShowList] = useState(false);
-  const [currentUserRecipes, setCurrentUserRecipes] = useState([])
   const [currentUserInfo, setCurrentUserInfo] = useState({
-    sunday: {},
-    monday: {},
-    tuesday: {},
-    wednesday: {},
-    thursday: {},
-    friday: {},
-    saturday: {}
+    sundayBreakfast: {title: "",img: "",recipe: ""},
+    sundayLunch: {title: "",img: "",recipe: ""},
+    sundayDinner: {title: "",img: "",recipe: ""},
+    mondayBreakfast: {title: "",img: "",recipe: ""},
+    mondayLunch: {title: "",img: "",recipe: ""},
+    mondayDinner: {title: "",img: "",recipe: ""},
+    tuesdayBreakfast: {title: "",img: "",recipe: ""},
+    tuesdayLunch: {title: "",img: "",recipe: ""},
+    tuesdayDinner: {title: "",img: "",recipe: ""},
+    wednesdayBreakfast: {title: "",img: "",recipe: ""},
+    wednesdayLunch: {title: "",img: "",recipe: ""},
+    wednesdayDinner: {title: "",img: "",recipe: ""},
+    thursdayBreakfast: {title: "",img: "",recipe: ""},
+    thursdayLunch: {title: "",img: "",recipe: ""},
+    thursdayDinner: {title: "",img: "",recipe: ""},
+    fridayBreakfast: {title: "",img: "",recipe: ""},
+    fridayLunch: {title: "",img: "",recipe: ""},
+    fridayDinner: {title: "",img: "",recipe: ""},
+    saturdayBreakfast: {title: "",img: "",recipe: ""},
+    saturdayLunch: {title: "",img: "",recipe: ""},
+    saturdayDinner: {title: "",img: "",recipe: ""},
   });
 
   function showUser() {
     setShowList(!showList);
   }
 
-
-  function updateDinnerMeal(userMealInfo, id, currentUserRecipe) {
-    setCurrentUserInfo((prev) => ({...prev, ...userMealInfo, id }));
-    axios.get(`/recipes/${id}`)
-    .then(res=>setCurrentUserRecipes(prev=>res.data))
-    .catch(err=>console.log(err))
-    
+  function updateUserInfo(id, sunB, sunL, sunD, monB, monL, monD,tueB, tueL, tueD,wedB, wedL, wedD,thuB, thuL, thuD,friB, friL, friD,satB, satL, satD,) {
+    setCurrentUserInfo({
+      userId: id,
+      sundayBreakfast: !{ ...sunB } ? "" : { ...sunB },
+      sundayLunch: !{ ...sunL } ? "" : { ...sunL },
+      sundayDinner: !{ ...sunD } ? "" : { ...sunD },
+      mondayBreakfast: !{ ...monB } ? "" : { ...monB },
+      mondayLunch: !{ ...monL } ? "" : { ...monL },
+      mondayDinner: !{ ...monD } ? "" : { ...monD },
+      tuesdayBreakfast: !{ ...tueB } ? "" : { ...tueB },
+      tuesdayLunch: !{ ...tueL } ? "" : { ...tueL },
+      tuesdayDinner: !{ ...tueD } ? "" : { ...tueD },
+      wednesdayBreakfast: !{ ...wedB } ? "" : { ...wedB },
+      wednesdayLunch: !{ ...wedL } ? "" : { ...wedL },
+      wednesdayDinner: !{ ...wedD } ? "" : { ...wedD },
+      thursdayBreakfast: !{ ...thuB } ? "" : { ...thuB },
+      thursdayLunch: !{ ...thuL } ? "" : { ...thuL },
+      thursdayDinner: !{ ...thuD } ? "" : { ...thuD },
+     fridayBreakfast: !{ ...friB } ? "" : { ...friB },
+     fridayLunch: !{ ...friL } ? "" : { ...friL },
+     fridayDinner: !{ ...friD } ? "" : { ...friD },
+      saturdayBreakfast: !{ ...satB } ? "" : { ...satB },
+      saturdayLunch: !{ ...satL } ? "" : { ...satL },
+      saturdayDinner: !{ ...satD } ? "" : { ...satD }
+    });
   }
+  //  this updates state with items that are clicked  (day is the current day passed as a string and type is either breakfast lunch or dinner)
+  const updateToDatabase = (id, mealTitle, image, rec, day, type) => {   
+    const dayType = day + type   
+    const updatedDBInfo = {[dayType]:{title:mealTitle, recipe:rec, img:image}}
+
+    axios
+    .put(`/users/${id}`, updatedDBInfo)
+    .then((res) => setCurrentUserInfo(prev=>({...prev, ...res.data})))
+    .catch((err) => console.log(err));
+  };
 
 
+  //GRABS THE SPECIFIED USER AND UPDATES STATE (updateUserInfo) WITH ITS DATA
   const chooseUser = users.map((user) => (
     <MealPlanUser
-      updateDinnerMeal={updateDinnerMeal}
       key={user._id}
-      {...user}
+      updateUserInfo={updateUserInfo}
+      user={user}
       showUser={showUser}
       name={user.name}
     />
   ));
-  function sundayOnClick (userId){
 
-    // axios.get(`/recipes/${userId}`)
-    // .then(res=>console.log(res.data))
-    // .catch(err=>console.log(err))
- 
-
-  }
-  function mondayOnClick (id){
-    console.log("monday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
-  function tuesdayOnClick (id){
-    console.log("tuesday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
-  function wednesdayOnClick (id){
-    console.log("wednesday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
-  function thursdayOnClick (id){
-    console.log("thursday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
-  function fridayOnClick (id){
-    console.log("friday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
-  function saturdayOnClick (id){
-    console.log("saturday")
-    console.log(savedRecipes.filter(recipe=>recipe.userId === id))
-  }
   return (
     <div>
-      {!showList && <div onClick={showUser}>Choose a user</div>}
-      {showList && (
+      <div className="container p-4 my-4 bg-white rounded-3">
+      <div className="row d-flex justify-content-center">
+      <div className="col-auto">
         <div>
-          {chooseUser}
-          <section onClick={showUser}>Hide List</section>
+      <div className= "meal-plan-select-user-div" onClick={showUser}>-- Select a User --
+      
+      {showList && <div >     
+        {chooseUser}</div>}
         </div>
-      )}
-      <div className="meal-plan-div">
-        <div>
-          <h1>Sunday</h1>
-          <MealPlanDay
-          onClick={sundayOnClick}
-            dinnerTitle={currentUserInfo.sunday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.sunday.dinnerRecipe}
-            dinnerImg={currentUserInfo.sunday.dinnerImg}
-            id={currentUserInfo.id}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-         
         </div>
-        <div>
-          <h1>Monday</h1>
-          <MealPlanDay
-           onClick={mondayOnClick}
-            dinnerTitle={currentUserInfo.monday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.monday.dinnerRecipe}
-            dinnerImg={currentUserInfo.monday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
-        <div>
-          <h1>Tuesday</h1>
-          <MealPlanDay
-          onClick={tuesdayOnClick}
-            dinnerTitle={currentUserInfo.tuesday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.tuesday.dinnerRecipe}
-            dinnerImg={currentUserInfo.tuesday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
-        <div>
-          <h1>Wednesday</h1>
-          <MealPlanDay
-          onClick={wednesdayOnClick}
-            dinnerTitle={currentUserInfo.wednesday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.wednesday.dinnerRecipe}
-            dinnerImg={currentUserInfo.wednesday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
-        <div>
-          <h1>Thursday</h1>
-          <MealPlanDay
-          onClick={thursdayOnClick}
-            dinnerTitle={currentUserInfo.thursday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.thursday.dinnerRecipe}
-            dinnerImg={currentUserInfo.thursday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
-        <div>
-          <h1>Friday</h1>
-          <MealPlanDay
-          onClick={fridayOnClick}
-            dinnerTitle={currentUserInfo.friday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.friday.dinnerRecipe}
-            dinnerImg={currentUserInfo.friday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
-        <div>
-          <h1>Saturday</h1>
-          <MealPlanDay
-          onClick={saturdayOnClick}
-            dinnerTitle={currentUserInfo.saturday.dinnerTitle}
-            dinnerRecipe={currentUserInfo.saturday.dinnerRecipe}
-            dinnerImg={currentUserInfo.saturday.dinnerImg}
-            updateDinnerMeal={updateDinnerMeal}
-            currentUserRecipes={currentUserRecipes}
-          />
-        </div>
+      </div>
+      </div>
+      </div>
+      <div>
+        <MealPlanWeek
+          updateToDatabase={updateToDatabase}
+          currentUserInfo={currentUserInfo}
+          updateUserInfo={updateUserInfo}
+        />
       </div>
     </div>
   );

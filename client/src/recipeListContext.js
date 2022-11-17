@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeListContext = React.createContext();
 
-// const API_KEY = process.env.REACT_APP_API_KEY;
-const API_KEY = "439cc1dd2b1746cfb48ea9a80a72a868"
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = "456cb6faf86e4b7ba8fb1bb06d8e3ca4"
+
+
+
 
 
 function RecipeListContextProvider(props) {
@@ -41,64 +45,20 @@ function RecipeListContextProvider(props) {
 
   function handlePageClick(data) {
     setOffset(data.selected * recipesPerPage)
+
   }
 
 
 
 
-  function updateMealPlan(id) {
-    console.log(id);
-  }
-
-  //               This allows the users to be created only on the second render and pulls the user data  
-  //               Below creates 3 users john, enzo, and sara in your local mongodb to simulate having 3 users already in the database
-  useEffect(() => {
+  //THIS GETS THE USER/RECIPEINFO WHEN STARTING
+  useEffect(() => {                                                          
     axios.get("/users").then((res) => setUsers((prev) => res.data));
     axios.get("/recipes").then((res) => setSavedRecipes(res.data));
-    count.current = count.current + 1;
-    if (    
-      users.find((user) => "john" === user.name) === undefined &&
-      users.find((user) => "sara" === user.name) === undefined &&     
-      users.find((user) => "enzo" === user.name) === undefined
-    ) {
-      axios
-        .post("/users", {
-          name: "john",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " john No Title",
-              dinnerImg: "john No Image",
-              dinnerRecipe: "john No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]));
-      axios
-        .post("/users", {
-          name: "enzo",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " Enzo No Title",
-              dinnerImg: "Enzo No Image",
-              dinnerRecipe: "Enzo No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]));
-      axios
-        .post("/users", {
-          name: "sara",
-          mealPlan: {
-            sunday: {
-              dinnerTitle: " Sara No Title",
-              dinnerImg: " Sara No Image",
-              dinnerRecipe: " Sara No Recipe",
-            },
-          },
-        })
-        .then((res) => setUsers((prev) => [...prev, res.data]))
+    count.current = count.current + 1; 
+    }, [])
 
-      }}, [])
+
 
 
 
@@ -146,7 +106,10 @@ function RecipeListContextProvider(props) {
     getSearchResults();
     getNumberOfPages();
     navigate("/returned-recipes");
+    // need to add in here a way to clear the search form back to blank
   }
+
+
 
   function saveUserRecipe(userId, recId, img, title) {
     const postedRecipe = {
@@ -169,7 +132,9 @@ function RecipeListContextProvider(props) {
       .catch((error) => console.log(error));
   }
 
-  function filterRecipeByUserId() {}
+
+ 
+
 
   return (
     <RecipeListContext.Provider
@@ -187,9 +152,9 @@ function RecipeListContextProvider(props) {
         pageCount,
         recipesPerPage,
         savedRecipesList,
-        setSavedRecipesList,
-        updateMealPlan,
-        savedRecipes
+        setSavedRecipesList,       
+        savedRecipes,
+        API_KEY
 
       }}
     >
