@@ -1,7 +1,8 @@
 import axios from "axios"
+import {nanoid} from "nanoid"
 export default function MealPlanGetRecipe (props) {
  
-const listSteps = props.currentRecipe.map(item=><div><h3>{item.number}</h3><p>{item.step}</p></div>)
+const listSteps = props.currentRecipe.map(item=><div key={nanoid()}><h3>{item.number}</h3><p>{item.step}</p></div>)
     return (
         <div>
      
